@@ -27,10 +27,10 @@ const cadastroUsuario = async (req, res) => {
 
         await knex('usuarios').insert({ nome, email, senha: senhaCriptografada })
 
-        return res.status(204).send();
+        return res.status(201).json({mensagem:"Usuario cadastrado com sucesso"});
 
     } catch (error) {
-
+        console.log(error);
         return res.status(500).json({ mensagem: 'Erro interno no sevidor ao cadastrar Usuario' });
 
     }
@@ -72,7 +72,7 @@ const login = async (req, res) => {
         });
 
     } catch (error) {
-
+        console.log(error);
         return res.status(500).json({ mensagem: "Erro interno no servidor ao logar usuario" });
 
     }
@@ -131,9 +131,12 @@ const atualizaUsuario = async (req, res) => {
 const excluirUsuario = async (req, res) => {
     const { id } = req.usuario;
     try {
+        await knex('tarefas').where({idusuario: id}).delete();
         await knex('usuarios').where({ id }).delete();
+
         return res.json({ mensagem: "Usuario Excluido com sucesso." });
     } catch (error) {
+        console.log(error);
         return res.status(500).json({ mensagem: "Erro interno no servidor ao excluir usuario Logado" });
     }
 
