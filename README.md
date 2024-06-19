@@ -31,21 +31,25 @@ Nele será possivel:
 - [Beekeeper Studio](https://www.beekeeperstudio.io/get) (v4.3.4 ou superior)
 ### Passos para instalação
 
-1. Instale as dependencias dos Pré-requisitos (para instalação do npm
-
+1. Instale as dependencias dos Pré-requisitos (para instalação do <a href='https://docs.npmjs.com/downloading-and-installing-node-js-and-npm'>npm).
+   
+2. Realize o clone do projeto:
+```bash
+git clone git@github.com:samuelrosaarruda/Task_SA.git
+```
 3. Com o VS Code aberto dentro da pasta do projeto clonado, digite no terminal do VS Code:
 
    ```bash
    npm install
    ```
 
-4. Instale as dependências:
+5. Instale as dependências:
 
    ```bash
    npm install
    ```
 
-5. Crie um arquivo `.env` na raiz do projeto e configure as variáveis de ambiente necessárias:
+6. Crie um arquivo `.env` na raiz do projeto e configure as variáveis de ambiente necessárias:
 
    ```env
    DB_HOST=localhost
@@ -54,7 +58,7 @@ Nele será possivel:
    DB_NAME=nome_do_banco
    ```
 
-6. Inicie o servidor:
+7. Inicie o servidor:
 
    ```bash
    npm start
