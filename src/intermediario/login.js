@@ -26,7 +26,7 @@ const vericarLogin = async (req, res, next) => {
         next();
 
     } catch (error) {
-        return res.status(500).json({ mensagem: "Usuario não atorizado" });
+        return res.status(403).json({ mensagem: "Usuario não atorizado" });
     }
 }
 
