@@ -12,13 +12,12 @@
 
 ## Descrição
 
-Esta é uma API realizada para registros e gerenciamentos (CRUD) de tarefas e de usuarios.
-Nele será possivel:
-- Cadastrar Tarefas e Usuarios;
-- Listar Tarefas e mostrar informação do Usuario Logado;
-- Atualizar Tarefas e as informações do Usuario Logado;
-- Excluir Tarefas e o registro do Usuario Logado;
-- As Tarefas serão relacionadas com o Usurio Logado, permitindo assim as alterações das Tarefas de cada Usuario Logado.
+Esta é uma API realizada para registros e gerenciamentos (CRUD) de tarefas e de usuários. Nele será possível:
+- Cadastrar Tarefas e Usuários;
+- Listar Tarefas e mostrar informação do Usuário Logado;
+- Atualizar Tarefas e as informações do Usuário Logado;
+- Excluir Tarefas e o registro do Usuário Logado;
+- As Tarefas serão relacionadas com o Usuário Logado, permitindo assim as alterações das Tarefas de cada Usuário Logado.
 ## Instalação
 
 ### Pré-requisitos
