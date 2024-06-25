@@ -31,26 +31,22 @@ Nele será possivel:
 - [Beekeeper Studio](https://www.beekeeperstudio.io/get) (v4.3.4 ou superior)
 ### Passos para instalação
 
-1. Instale as dependencias dos Pré-requisitos (para instalação do <a href='https://docs.npmjs.com/downloading-and-installing-node-js-and-npm'>npm).
+1. Instale as dependencias dos Pré-requisitos (para instalação do [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)).
    
 2. Realize o clone do projeto:
-```bash
-git clone git@github.com:samuelrosaarruda/Task_SA.git
-```
+   ```bash
+   git clone git@github.com:samuelrosaarruda/Task_SA.git
+   ```
 3. Com o VS Code aberto dentro da pasta do projeto clonado, digite no terminal do VS Code:
 
    ```bash
    npm install
    ```
 
-5. Instale as dependências:
+4. Rode os comandos de criação do banco de dados e das tabelas, presentes no arquivo [dump.sql](https://github.com/samuelrosaarruda/Task_SA/blob/master/dump.sql), no Beekeeper Studio:
+- O tipo de conexão do BD deve ser `Postgres`
 
-   ```bash
-   npm install
-   ```
-
-6. Crie um arquivo `.env` na raiz do projeto e configure as variáveis de ambiente necessárias:
-
+5. Crie um arquivo `.env` na raiz do projeto e configure as variáveis de ambiente necessárias:
    ```env
    DB_HOST=localhost
    DB_USER=seu_usuario
@@ -58,7 +54,7 @@ git clone git@github.com:samuelrosaarruda/Task_SA.git
    DB_NAME=nome_do_banco
    ```
 
-7. Inicie o servidor:
+6. Inicie o servidor:
 
    ```bash
    npm start
@@ -70,44 +66,50 @@ git clone git@github.com:samuelrosaarruda/Task_SA.git
 
 - `npm start`: Inicia o servidor em modo de produção.
 - `npm run dev`: Inicia o servidor em modo de desenvolvimento com hot-reload.
-- `npm test`: Executa os testes.
 
 ### Exemplos de uso
 
-Para interagir com a API, você pode usar ferramentas como [Postman](https://www.postman.com/) ou [cURL](https://curl.se/). Veja os endpoints disponíveis abaixo.
+Para interagir com a API, você pode usar ferramentas como [Postman](https://www.postman.com/downloads/) ou [Insomnia](https://insomnia.rest/download). Veja os endpoints disponíveis abaixo.
 
 ## Endpoints
-
+   
 ### Autenticação
 
-- **`POST /api/auth/login`**
+- **`POST /login`**
   - Descrição: Autentica um usuário.
   - Parâmetros:
     - `email` (string) - obrigatório
     - `password` (string) - obrigatório
   - Resposta:
     - `200 OK`: Retorna o token JWT e informações do usuário.
-    - `401 Unauthorized`: Credenciais inválidas.
-
+    - `400 Bad Request`: Caso não seja enviada todas as informações, retornará: 'Todos os dados devem ser fornecidos'
+    - `400 Bad Request`: Caso as informações estejam inválidas, retornará: 'Email ou senha inválida'
+    - `404 Not Found`: Caso o usuario não esteja cadastrado no banco de dados, retornará: 'Usuario não encontrado'
+      
+- **`Intermediario verificaLogin`**
+  - Descrição: Irá vericar se usuário esta logado, para a realização das modicações nas rotas de Usuários e de Tabelas.
+  - Parâmetros:
+    -`Token`: Nescessário fornecer o Token na função Bearer Token do Postman ou Insomnia.
+  - Respostas:
+    -`401`
 ### Usuários
-
-- **`GET /api/users`**
-  - Descrição: Retorna uma lista de usuários.
+- **`POST /usuario`**
+  - Descrição: Cria um usuario.
   - Parâmetros:
-    - Nenhum
-  - Resposta:
-    - `200 OK`: Lista de usuários.
-
-- **`POST /api/users`**
-  - Descrição: Cria um novo usuário.
-  - Parâmetros:
-    - `name` (string) - obrigatório
+    - `nome` (string) - obrigatório
     - `email` (string) - obrigatório
-    - `password` (string) - obrigatório
+    - `senha` (string) - obrigatório
   - Resposta:
-    - `201 Created`: Usuário criado com sucesso.
-    - `400 Bad Request`: Parâmetros inválidos.
-
+    - `201 Created`: Retorna a mensagem: 'Usuario cadastrado com sucesso'
+    - `400 Bad Request`: Caso não seja enviada todas as informações, retornará: 'Todos os dados devem ser fornecidos'
+    - `400 BAD Request`: Caso já exista um usuario cadastrado com o email enviado, retornará: 'Este email pertence a outro usuario, informe um email valido para o registro'
+    - `500 Internal Server Error`: Caso ocorra algum erro no servidor em momento de cadatro de usuário, retornará: 'Erro interno no sevidor ao cadastrar Usuario'
+   
+  -**`GET /usuario`**
+   - Descrição: Lista as informaçoes do usuário logado.
+   - Resposta:
+     - `200 OK`: Irá mostrar os dados do usuário.
+     
 ## Contribuição
 
 1. Faça um fork do projeto.
