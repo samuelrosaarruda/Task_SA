@@ -82,34 +82,87 @@ Para interagir com a API, você pode usar ferramentas como [Postman](https://www
     - `password` (string) - obrigatório
   - Resposta:
     - `200 OK`: Retorna o token JWT e informações do usuário.
-    - `400 Bad Request`: Caso não seja enviada todas as informações, retornará: 'Todos os dados devem ser fornecidos'
-    - `400 Bad Request`: Caso as informações estejam inválidas, retornará: 'Email ou senha inválida'
-    - `404 Not Found`: Caso o usuario não esteja cadastrado no banco de dados, retornará: 'Usuario não encontrado'
+    - `400 Bad Request`: Caso tenha sido passada uma informação inválida.
+    - `404 Not Found`: Caso o usuario não esteja cadastrado no banco de dados
       
 - **`Intermediario verificaLogin`**
   - Descrição: Irá vericar se usuário esta logado, para a realização das modicações nas rotas de Usuários e de Tabelas.
   - Parâmetros:
-    -`Token`: Nescessário fornecer o Token na função Bearer Token do Postman ou Insomnia.
+    - `Token`: Nescessário fornecer o Token na função Bearer Token do Postman ou Insomnia.
   - Respostas:
-    -`401`
+    - `401 Unauthorized`: Caso não seja fornecido o Token
+    - `404 Not Found`: Caso o usuário não seja encontrado no registro de Usuários
+    - `403 Forbidden`: Caso o usuário esteja não esteja autorizado ou tenha fornecido um token que já inspirou
 ### Usuários
 - **`POST /usuario`**
-  - Descrição: Cria um usuario.
+  - Descrição: Cria um usuário.
   - Parâmetros:
     - `nome` (string) - obrigatório
     - `email` (string) - obrigatório
     - `senha` (string) - obrigatório
   - Resposta:
-    - `201 Created`: Retorna a mensagem: 'Usuario cadastrado com sucesso'
-    - `400 Bad Request`: Caso não seja enviada todas as informações, retornará: 'Todos os dados devem ser fornecidos'
-    - `400 BAD Request`: Caso já exista um usuario cadastrado com o email enviado, retornará: 'Este email pertence a outro usuario, informe um email valido para o registro'
-    - `500 Internal Server Error`: Caso ocorra algum erro no servidor em momento de cadatro de usuário, retornará: 'Erro interno no sevidor ao cadastrar Usuario'
+    - `201 Created`: Retorna as informações do usuário criado
+    - `400 Bad Request`: Caso tenha uma requsição inválida
+    - `500 Internal Server Error`: Caso ocorra algum erro no servidor em momento de cadatro de usuário
    
-  -**`GET /usuario`**
+- **`GET /usuario`**
    - Descrição: Lista as informaçoes do usuário logado.
    - Resposta:
      - `200 OK`: Irá mostrar os dados do usuário.
-     
+     - `500 Internal Server Error`: Caso ocorra algum erro no servidor em momento do detalhamento do usuário logado
+       
+- **`PUT /usuario`**
+  - Descrição: Irá atualizar as informações do usuário logado.
+  - Parâmetros:
+    - `nome` (string) - obrigatório
+    - `email` (string) - obrigatório
+    - `senha` (string) - obrigatório
+  - Resposta:
+    - `200 Ok`: Retornará as informações atualizadas do usuário logado
+    - `400 Bad Request`: Caso seja fornecido uma informação inválida
+    - `500 Internal Server Error`: Caso tenha ocorrido um problema no servidor ao acessar a rota de atualização do usuário logado
+      
+- **`DELETE /usuario`**
+  - Descrição: Irá remover o registro do Usuário logado.
+  - Resposta:
+    - `200 OK`: Irá remover o usuário logado.
+    - `500 Internal Server Error`: Caso tenha corrido um problema no servidor ao acessar a rota de exclusão do usuário logado
+
+### Tarefas
+- **`POST /tarefas`**
+  - Descrição: Cria uma tarefa no registro de tarefas do usuário logado.
+  - Parâmetros:
+    - `titulo` (string) - obrigatório
+    - `descrição` (string) - obrigatório
+    - `status` (string) - obrigatório
+  - Resposta:
+    - `201 Created`: Retorna as informações da tarefa criada
+    - `400 Bad Request`: Caso tenha uma requsição inválida
+    - `500 Internal Server Error`: Caso ocorra algum erro no servidor em momento de cadastro de tarefas
+      
+- **`GET /tarefas`**
+   - Descrição: Lista as informações das tarefas do usuário logado.
+   - Resposta:
+     - `200 OK`: Irá mostrar as tarefas do usuário logado.
+     - `500 Internal Server Error`: Caso ocorra algum erro no servidor em momento do detalhamento das tarefas do usuário logado
+       
+- **`PUT /tarefas/:idta`**
+  - Descrição: Irá atualizar as informações de uma tarefa do usuário logado.
+  - Parâmetros:
+    - `titulo` (string) - obrigatório
+    - `descrição` (string) - obrigatório
+    - `status` (string) - obrigatório
+  - Resposta:
+    - `200 Ok`: Retornará as informações atualizadas da tarefa do usuário logado
+    - `400 Bad Request`: Caso seja fornecido uma informação inválida
+    - `500 Internal Server Error`: Caso tenha ocorrido um problema no servidor ao acessar a rota de atualização da tarefa do usuario logado
+      
+- **`DELETE /tarefas/:idta`**
+  - Descrição: Irá remover o registro de uma tarefa do usuário logado.
+  - Resposta:
+    - `200 OK`: A tarefa desejada foi removida
+    - `500 Internal Server Error`: Caso tenha corrido um problema no servidor ao acessar a rota de exclusão de tarefa do usuário logado
+         
 ## Contribuição
 
 1. Faça um fork do projeto.
@@ -120,10 +173,10 @@ Para interagir com a API, você pode usar ferramentas como [Postman](https://www
 
 ## Contato
 
-- Nome: Seu Nome
-- Email: seu.email@example.com
-- LinkedIn: [Seu LinkedIn](https://www.linkedin.com/in/seuusuario)
+- Nome: **Samuel da Rosa Arruda**
+- Email: arrudarosasamuel@gmail.com
+- LinkedIn: [Meu LinkedIn](https://www.linkedin.com/in/samuel-da-rosa-arruda-1b3676201/)
 
 ---
 
-Desenvolvido com ❤️ por [Seu Nome](https://github.com/seuusuario).
+Desenvolvido com ❤️ por [Samuel da Rosa Arruda](https://github.com/samuelrosaarruda).
