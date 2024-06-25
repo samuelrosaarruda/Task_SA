@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon run ./src/index.js"
+    "start": "nodemon run ./src/index.js"
   },
   "keywords": [],
   "author": "",
